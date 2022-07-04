@@ -12,7 +12,8 @@ import EntryScreen from "./pages/EntryScreen";
 
 export default function App() {
     const [token, setToken] = React.useState(localStorage.getItem("token"));
-    const contextValue = { token, setToken };
+    const BASE_URL = "https://mywallet2.herokuapp.com";
+    const contextValue = { token, setToken, BASE_URL };
 
     return (
         <ApplicationContext.Provider value={contextValue}>
