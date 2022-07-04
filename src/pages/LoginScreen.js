@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ApplicationContext from "../contexts/ApplicationContext";
 
 import Loader from "../components/Loader";
+import Center from "../components/Center";
 
 export default function LoginScreen() {
     const [email, setEmail] = React.useState("");
@@ -46,34 +47,34 @@ export default function LoginScreen() {
     };
 
     return (
-        <>
-        <h1>MyWallet</h1>
-        <form onSubmit={login}>
-            <input
-                type="email"
-                id="email"
-                placeholder="E-mail"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                disabled={isLoadig}
-                required
-            />
-            <input
-                type="password"
-                id="password"
-                placeholder="Senha"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                disabled={isLoadig}
-                required
-            />
-            <button type="submit" disabled={isLoadig}>
-                {isLoadig? <Loader />: "Entrar"}
-            </button>
-        </form>
-        <Link to="/sign-up">
-            Primeira vez? Cadastre-se!
-        </Link>
-        </>
+        <Center>
+            <h1>MyWallet</h1>
+            <form onSubmit={login}>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="E-mail"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    disabled={isLoadig}
+                    required
+                />
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    disabled={isLoadig}
+                    required
+                />
+                <button type="submit" disabled={isLoadig}>
+                    {isLoadig? <Loader />: "Entrar"}
+                </button>
+            </form>
+            <Link to="/sign-up">
+                Primeira vez? Cadastre-se!
+            </Link>
+        </Center>
     );
 };

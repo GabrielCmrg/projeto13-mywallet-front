@@ -11,11 +11,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .root {
+        height: 100vh;
+        padding: 25px;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        height: 100vh;
     }
 
     h1 {
@@ -23,6 +24,20 @@ const GlobalStyle = createGlobalStyle`
         color: white;
         font-size: 32px;
         margin-bottom: 10px;
+    }
+
+    h2 {
+        color: white;
+        font-size: 26px;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+
+    ion-icon {
+        font-size: 24px;
+        cursor: pointer;
     }
 
     form {
@@ -62,6 +77,7 @@ const GlobalStyle = createGlobalStyle`
 
     button:hover {
         cursor: pointer;
+        filter: brightness(1.1);
     }
 
     form input::placeholder {
