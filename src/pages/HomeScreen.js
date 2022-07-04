@@ -68,21 +68,28 @@ export default function HomeScreen() {
 
     function showEntries() {
         if (entries.length > 0) {
-            return entries.map(entry => {
-                let color;
-                if (entry.type === "credit") {
-                    color = "#03AC00";
-                } else if (entry.type === "debit") {
-                    color = "#C70000";
-                }
+            return (
+                <>
+                <div>
+                    {entries.map((entry, index) => {
+                    let color;
+                    if (entry.type === "credit") {
+                        color = "#03AC00";
+                    } else if (entry.type === "debit") {
+                        color = "#C70000";
+                    }
 
-                return (
-                    <Entry color={color}>
-                        <div><span>{entry.date}</span><span>{entry.description}</span></div>
-                        <div>{entry.amount.toFixed(2).replace('.', ',')}</div>
-                    </Entry>
-                );
-                });
+                    return (
+                        <Entry color={color} key={index}>
+                            <div><span>{entry.date}</span><span>{entry.description}</span></div>
+                            <div>{entry.amount.toFixed(2).replace('.', ',')}</div>
+                        </Entry>
+                    );
+                    })}
+                </div>
+                <Total color={totalColor}><div>SALDO</div><div>{total}</div></Total>
+                </>
+            );
         } else {
             return (
                 <NoEntries>
@@ -96,8 +103,7 @@ export default function HomeScreen() {
         <Container>
             <h2>Olá, {isLoading? <Loader />: name}<ion-icon name="exit-outline"></ion-icon></h2>
             <Entries>
-                <div>{ showEntries() }</div>
-                <Total color={totalColor}><div>SALDO</div><div>{total}</div></Total>
+                { showEntries() }
             </Entries>
             <Grid>
                 <Link to="/new-credit">
