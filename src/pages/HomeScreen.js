@@ -10,9 +10,31 @@ import styled from "styled-components";
 export default function HomeScreen() {
     const [name, setName] = React.useState("");
     const [entries, setEntries] = React.useState([]);
+    const [total, setTotal] = React.useState(0);
+    const [totalColor, setTotalColor] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
     const navigate = useNavigate();
     const { BASE_URL, token, setToken } = React.useContext(ApplicationContext);
+
+    React.useEffect(() => {
+        let sum = 0;
+        for (const entry of entries) {
+            if (entry.type === "credit") {
+                sum += entry.amount;
+            } else if (entry.type === "debit") {
+                sum -= entry.amount;
+            }
+        }
+        setTotal(sum);
+    }, [entries]);
+
+    React.useEffect(() => {
+        if (total >= 0) {
+            setTotalColor("#C70000");
+        } else {
+            setTotalColor("#03AC00");
+        }
+    }, [total]);
 
     React.useEffect(() => {
         if (token === null) {
@@ -46,7 +68,21 @@ export default function HomeScreen() {
 
     function showEntries() {
         if (entries.length > 0) {
-            entries.map(entry => <div>{entry.description}</div>)
+            return entries.map(entry => {
+                let color;
+                if (entry.type === "credit") {
+                    color = "#03AC00";
+                } else if (entry.type === "debit") {
+                    color = "#C70000";
+                }
+
+                return (
+                    <Entry color={color}>
+                        <div><span>{entry.date}</span><span>{entry.description}</span></div>
+                        <div>{entry.amount.toFixed(2).replace('.', ',')}</div>
+                    </Entry>
+                );
+                });
         } else {
             return (
                 <NoEntries>
@@ -60,7 +96,8 @@ export default function HomeScreen() {
         <Container>
             <h2>Olá, {isLoading? <Loader />: name}<ion-icon name="exit-outline"></ion-icon></h2>
             <Entries>
-                { showEntries() }
+                <div>{ showEntries() }</div>
+                <Total color={totalColor}><div>SALDO</div><div>{total}</div></Total>
             </Entries>
             <Grid>
                 <Link to="/new-credit">
@@ -79,6 +116,44 @@ export default function HomeScreen() {
         </Container>
     );
 };
+
+const Total = styled.div`
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    div:first-child {
+        color: black;
+        font-weight: 700;
+    }
+
+    div:last-child {
+        color: ${props => props.color};
+    }
+`;
+
+const Entry = styled.div`
+    display: flex;
+    justify-content: space-between;
+    div:first-child {
+        span:first-child {
+            color: #C6C6C6;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        span:last-child{
+            color: black;
+            font-size: 16px;
+        }
+    }
+
+    div:last-child {
+        color: ${props => props.color};
+        font-size: 16px;
+    }
+`;
 
 const Button = styled.button`
     background-color: #A328D6;
@@ -123,6 +198,11 @@ const Entries = styled.div`
     height: 446px;
     background-color: white;
     border-radius: 5px;
+    box-sizing: border-box;
+    padding: 22px 12px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 const NoEntries = styled.div`
