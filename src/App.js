@@ -7,6 +7,8 @@ import ApplicationContext from "./contexts/ApplicationContext";
 
 import HomeScreen from "./pages/HomeScreen";
 import LoginScreen from "./pages/LoginScreen";
+import SignupScreen from "./pages/SignupScreen";
+import EntryScreen from "./pages/EntryScreen";
 
 export default function App() {
     const [token, setToken] = React.useState(localStorage.getItem("token"));
