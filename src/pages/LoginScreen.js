@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import ApplicationContext from "../contexts/ApplicationContext";
 
+import Loader from "../components/Loader";
+
 export default function LoginScreen() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -58,7 +60,7 @@ export default function LoginScreen() {
                 required
             />
             <button type="submit" disabled={isLoadig}>
-                {isLoadig? "perai rapaz": "Entrar"}
+                {isLoadig? <Loader />: "Entrar"}
             </button>
         </form>
         <Link to="/sign-up">
