@@ -1,5 +1,5 @@
 export default function LoginScreen() {
     return (
-        <>login here</>
+        <h1>MyWallet</h1>
     );
 };
