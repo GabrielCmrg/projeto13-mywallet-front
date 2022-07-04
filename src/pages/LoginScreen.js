@@ -11,7 +11,15 @@ export default function LoginScreen() {
     const [password, setPassword] = React.useState("");
     const [isLoadig, setIsLoading] = React.useState(false);
     const navigate = useNavigate();
-    const { BASE_URL, setToken } = React.useContext(ApplicationContext);
+    const { BASE_URL, token, setToken } = React.useContext(ApplicationContext);
+
+    React.useEffect(() => {
+        if (token !== null) {
+            navigate("/");
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     function login(event) {
         event.preventDefault();
@@ -25,9 +33,9 @@ export default function LoginScreen() {
         const promise = axios.post(BASE_URL + "/login", credentials);
         promise
             .then(response => {
-                const token = response.data.token;
-                localStorage.setItem("token", token);
-                setToken(token);
+                const receivedToken = response.data.token;
+                localStorage.setItem("token", receivedToken);
+                setToken(receivedToken);
                 setIsLoading(false);
                 navigate("/");
             })
