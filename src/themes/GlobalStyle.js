@@ -35,6 +35,12 @@ const GlobalStyle = createGlobalStyle`
         margin-bottom: 22px;
     }
 
+    h3 {
+        color: white;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
     ion-icon {
         font-size: 24px;
         cursor: pointer;
