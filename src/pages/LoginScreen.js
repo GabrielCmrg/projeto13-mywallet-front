@@ -43,7 +43,7 @@ export default function LoginScreen() {
                 alert(error.response.data);
                 setIsLoading(false);
             });
-    }
+    };
 
     return (
         <>
