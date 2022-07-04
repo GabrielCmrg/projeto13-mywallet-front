@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
-export default function HomeScreen() {
+export default function SignupScreen() {
     const navigate = useNavigate();
     React.useEffect(() => {
         const token = localStorage.getItem("token");
@@ -9,8 +9,8 @@ export default function HomeScreen() {
             navigate("/login");
         }
     });
-    
+
     return (
-        <>home with entries history</>
+        <></>
     );
 };

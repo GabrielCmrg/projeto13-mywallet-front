@@ -19,6 +19,9 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<HomeScreen />} />
                     <Route path="/login" element={<LoginScreen />} />
+                    <Route path="/sign-up" element={<SignupScreen />} />
+                    <Route path="/new-credit" element={<EntryScreen type="credit" />} />
+                    <Route path="/new-debit" element={<EntryScreen type="debit" />} />
                 </Routes>
             </BrowserRouter>
         </ApplicationContext.Provider>
